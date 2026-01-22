@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamers Edge 09 | Ahnaf Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -12,210 +12,125 @@
             --primary: #FF2D7D; 
             --dark: #121212; 
             --light: #FFF0F5; 
-            --white: #ffffff;
             --card-bg: #ffffff;
         }
 
         body.dark-theme {
             --light: #0f0f0f;
             --dark: #ffffff;
-            --white: #1a1a1a;
             --card-bg: #222222;
         }
 
-        html { scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
+        body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); }
 
         header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            background: var(--card-bg);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             position: sticky; top: 0; z-index: 1000;
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 3px solid var(--primary);
         }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
-
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 20px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
 
         .fa-gear {
             font-size: 1.4rem; color: var(--primary);
             animation: gearSpin 4s linear infinite;
-            cursor: pointer; margin-left: 20px;
+            cursor: pointer;
         }
         @keyframes gearSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        
-        .settings-menu {
-            position: absolute; right: 5%; top: 70px; background: var(--card-bg);
-            padding: 15px; border-radius: 12px; display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 160px; z-index: 2000;
-            border: 1px solid var(--primary);
-        }
-        .settings-menu.active { display: block; }
-        .settings-menu button {
-            width: 100%; padding: 8px; margin-top: 8px; cursor: pointer;
-            background: var(--primary); color: white; border: none; border-radius: 5px; font-weight: bold;
-        }
 
         .hero {
-            background: linear-gradient(135deg, #121212 0%, #300a18 100%);
-            color: white; padding: 100px 5% 120px; text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            background: #121212;
+            color: white; padding: 80px 5%; text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
-        .terminal-box { font-family: 'Fira Code', monospace; font-size: 2.5rem; }
-        .cursor { display: inline-block; width: 12px; height: 35px; background: var(--primary); animation: blink 0.8s infinite; vertical-align: middle; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .terminal { font-family: 'Fira Code', monospace; font-size: 2rem; color: var(--primary); }
 
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; color: var(--dark); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         
         .card { 
-            background: var(--card-bg); padding: 20px; border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 45, 125, 0.1);
-            transition: 0.3s;
+            background: var(--card-bg); padding: 15px; border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
         
-        .video-container { aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
-        .video-container iframe { width: 100%; height: 100%; border: none; }
+        .video-box { aspect-ratio: 16/9; background: #000; border-radius: 10px; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
 
         .btn { 
-            display: inline-block; background: var(--primary); color: white; 
-            padding: 10px 25px; border-radius: 50px; text-decoration: none; 
-            font-weight: 600; font-size: 0.9rem;
+            display: block; background: var(--primary); color: white; 
+            padding: 12px; border-radius: 8px; text-decoration: none; 
+            text-align: center; font-weight: 600; margin-top: 15px;
         }
 
-        footer { background: #121212; color: white; text-align: center; padding: 40px; margin-top: 50px; }
-        .status-msg { grid-column: 1/-1; text-align: center; padding: 30px; font-style: italic; opacity: 0.6; }
+        footer { background: #121212; color: white; text-align: center; padding: 30px; margin-top: 50px; }
     </style>
 </head>
 <body id="body">
 
     <header>
         <div class="logo">GAMERS EDGE 09</div>
-        <nav>
-            <ul>
-                <li><a href="#channels">CHANNELS</a></li>
-                <li><a href="#videos">FEED</a></li>
-                <li><i class="fa-solid fa-gear" onclick="toggleSettings()"></i></li>
-            </ul>
-        </nav>
-        <div class="settings-menu" id="menu">
-            <p style="font-size: 0.8rem; font-weight:bold;">Theme Settings</p>
-            <button onclick="setTheme('pink')">Pink Theme</button>
-            <button onclick="setTheme('dark')">Dark Theme</button>
-        </div>
+        <i class="fa-solid fa-gear" onclick="toggleTheme()"></i>
     </header>
 
     <section class="hero">
-        <div class="terminal-box">
-            root@ahnaf:~$ <span id="typewriter"></span><span class="cursor"></span>
-        </div>
-        <p style="opacity: 0.6; margin-top: 10px;">SYNCING YOUTUBE DATABASE...</p>
+        <div class="terminal">root@ahnaf:~$ <span id="type"></span>_</div>
     </section>
 
     <div class="container">
-        <h2 id="channels" class="section-title">My Channels</h2>
+        <h2 class="section-title">Latest From My Channels</h2>
         <div class="grid">
+            
             <div class="card">
-                <h3>Game Explorer Gamerz</h3>
-                <a href="https://youtube.com/@gameexplorergamerz" target="_blank" class="btn" style="margin-top:10px">Subscribe</a>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=gameexplorergamerz"></iframe>
+                </div>
+                <h3 style="margin-top:10px;">Game Explorer Gamerz</h3>
+                <a href="https://youtube.com/@gameexplorergamerz" class="btn">View Channel</a>
             </div>
-            <div class="card">
-                <h3>Gameverse Explorer</h3>
-                <a href="https://youtube.com/@gameverseexplorergamer" target="_blank" class="btn" style="margin-top:10px">Subscribe</a>
-            </div>
-            <div class="card">
-                <h3>Run Till Craft</h3>
-                <a href="https://youtube.com/@runtillcraft" target="_blank" class="btn" style="margin-top:10px">Subscribe</a>
-            </div>
-        </div>
 
-        <h2 id="videos" class="section-title">Latest Videos & Shorts</h2>
-        <div id="video-feed" class="grid">
-            <div class="status-msg">Fetching live content...</div>
+            <div class="card">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=gameverseexplorergamer"></iframe>
+                </div>
+                <h3 style="margin-top:10px;">Gameverse Explorer</h3>
+                <a href="https://youtube.com/@gameverseexplorergamer" class="btn">View Channel</a>
+            </div>
+
+            <div class="card">
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=runtillcraft"></iframe>
+                </div>
+                <h3 style="margin-top:10px;">Run Till Craft</h3>
+                <a href="https://youtube.com/@runtillcraft" class="btn">View Channel</a>
+            </div>
+
         </div>
     </div>
 
-    <footer><p>&copy; 2026 AHNAF | GAMERS EDGE 09</p></footer>
+    <footer>&copy; 2026 AHNAF | GAMERS EDGE 09</footer>
 
     <script>
-        // 1. Ahnaf Typewriter Effect
-        const text = "Ahnaf_";
+        // Simple Typewriter
+        const text = "Ahnaf_Gamer";
         let i = 0;
-        function type() {
+        function typing() {
             if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++; setTimeout(type, 200);
+                document.getElementById("type").innerHTML += text.charAt(i);
+                i++; setTimeout(typing, 150);
             }
         }
+        typing();
 
-        // 2. Theme Settings
-        function toggleSettings() { document.getElementById('menu').classList.toggle('active'); }
-        function setTheme(mode) {
-            if(mode === 'dark') document.getElementById('body').classList.add('dark-theme');
-            else document.getElementById('body').classList.remove('dark-theme');
-            toggleSettings();
+        // Simple Dark Mode
+        function toggleTheme() {
+            document.getElementById('body').classList.toggle('dark-theme');
         }
-
-        // 3. AUTO-FEED (Updated IDs from your source code)
-        const channels = [
-            { name: 'Game Explorer Gamerz', id: 'UC8-5Yc9_fX9f5H-YI9Xf_mw' }, 
-            { name: 'Gameverse Explorer', id: 'UCj0lP0o6X_9Y0L_zM5v5GZw' },
-            { name: 'Run Till Craft', id: 'UC7f_5G9X_9Y0L_zM5v5GZw' }
-        ];
-
-        async function fetchFeed() {
-            const feedContainer = document.getElementById('video-feed');
-            let hasLoaded = false;
-
-            for (const ch of channels) {
-                try {
-                    // Using a more reliable open-source proxy to avoid "Database sync pending"
-                    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}`;
-                    const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-                    
-                    const response = await fetch(proxyUrl);
-                    const data = await response.json();
-
-                    if (data.status === 'ok' && data.items.length > 0) {
-                        if (!hasLoaded) { feedContainer.innerHTML = ''; hasLoaded = true; }
-                        
-                        // Show the latest video for each channel
-                        const video = data.items[0];
-                        const videoId = video.link.split('v=')[1];
-
-                        feedContainer.innerHTML += `
-                            <div class="card">
-                                <div class="video-container">
-                                    <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen loading="lazy"></iframe>
-                                </div>
-                                <h3 style="font-size: 1rem;">${video.title}</h3>
-                                <p style="color:var(--primary); font-size: 0.75rem; font-weight:bold;">${ch.name}</p>
-                            </div>
-                        `;
-                    }
-                } catch (e) {
-                    console.error("Error fetching " + ch.name);
-                }
-            }
-            if (!hasLoaded) {
-                feedContainer.innerHTML = '<div class="status-msg">Syncing error. Please try again in 1 minute.</div>';
-            }
-        }
-
-        window.onload = () => {
-            type();
-            fetchFeed();
-        };
     </script>
 </body>
 </html>
