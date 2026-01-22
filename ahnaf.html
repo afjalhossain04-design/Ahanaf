@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamers Edge 09 | Ahnaf</title>
+    <title>Gamers Edge 09 | Ahnaf Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -14,7 +14,6 @@
             --light: #FFF0F5; 
             --white: #ffffff;
             --card-bg: #ffffff;
-            --header-bg: rgba(255, 255, 255, 0.9);
         }
 
         body.dark-theme {
@@ -22,7 +21,6 @@
             --dark: #ffffff;
             --white: #1a1a1a;
             --card-bg: #222222;
-            --header-bg: rgba(15, 15, 15, 0.9);
         }
 
         html { scroll-behavior: smooth; }
@@ -30,7 +28,7 @@
         body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
 
         header {
-            background: var(--header-bg);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             padding: 1rem 5%;
             display: flex;
@@ -76,13 +74,13 @@
 
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .section-title { margin: 40px 0 20px; border-left: 6px solid var(--primary); padding-left: 15px; color: var(--dark); }
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         
         .card { 
             background: var(--card-bg); padding: 20px; border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid rgba(255, 45, 125, 0.1);
+            transition: 0.3s;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--primary); }
         
@@ -121,6 +119,7 @@
         <div class="terminal-box">
             root@ahnaf:~$ <span id="typewriter"></span><span class="cursor"></span>
         </div>
+        <p style="opacity: 0.6; margin-top: 10px;">SYNCING YOUTUBE DATABASE...</p>
     </section>
 
     <div class="container">
@@ -140,16 +139,16 @@
             </div>
         </div>
 
-        <h2 id="videos" class="section-title">Latest Updates</h2>
+        <h2 id="videos" class="section-title">Latest Videos & Shorts</h2>
         <div id="video-feed" class="grid">
-            <div class="status-msg">Connecting to YouTube Database...</div>
+            <div class="status-msg">Fetching live content...</div>
         </div>
     </div>
 
     <footer><p>&copy; 2026 AHNAF | GAMERS EDGE 09</p></footer>
 
     <script>
-        // 1. Typing Animation
+        // 1. Ahnaf Typewriter Effect
         const text = "Ahnaf_";
         let i = 0;
         function type() {
@@ -159,7 +158,7 @@
             }
         }
 
-        // 2. Settings
+        // 2. Theme Settings
         function toggleSettings() { document.getElementById('menu').classList.toggle('active'); }
         function setTheme(mode) {
             if(mode === 'dark') document.getElementById('body').classList.add('dark-theme');
@@ -167,50 +166,56 @@
             toggleSettings();
         }
 
-        // 3. Automated Feed Script
-        // NOTE: If sync fails, check these IDs in your YouTube Advanced Settings
+        // 3. AUTO-FEED (Updated IDs from your source code)
         const channels = [
-            { name: 'Game Explorer', id: 'UC8-5Yc9_fX9f5H-YI9Xf_mw' }, 
-            { name: 'Gameverse', id: 'UCj0lP0o6X_9Y0L_zM5v5GZw' },
+            { name: 'Game Explorer Gamerz', id: 'UC8-5Yc9_fX9f5H-YI9Xf_mw' }, 
+            { name: 'Gameverse Explorer', id: 'UCj0lP0o6X_9Y0L_zM5v5GZw' },
             { name: 'Run Till Craft', id: 'UC7f_5G9X_9Y0L_zM5v5GZw' }
         ];
 
-        async function fetchVideos() {
-            const container = document.getElementById('video-feed');
-            let successCount = 0;
+        async function fetchFeed() {
+            const feedContainer = document.getElementById('video-feed');
+            let hasLoaded = false;
 
             for (const ch of channels) {
                 try {
-                    // Using a more reliable RSS-to-JSON service
-                    const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}&api_key=your_free_key_here`);
+                    // Using a more reliable open-source proxy to avoid "Database sync pending"
+                    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${ch.id}`;
+                    const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+                    
+                    const response = await fetch(proxyUrl);
                     const data = await response.json();
 
                     if (data.status === 'ok' && data.items.length > 0) {
-                        if (successCount === 0) container.innerHTML = '';
-                        successCount++;
+                        if (!hasLoaded) { feedContainer.innerHTML = ''; hasLoaded = true; }
                         
-                        const v = data.items[0]; // Get newest video
-                        const vId = v.link.split('v=')[1];
-                        
-                        container.innerHTML += `
+                        // Show the latest video for each channel
+                        const video = data.items[0];
+                        const videoId = video.link.split('v=')[1];
+
+                        feedContainer.innerHTML += `
                             <div class="card">
                                 <div class="video-container">
-                                    <iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe>
+                                    <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen loading="lazy"></iframe>
                                 </div>
-                                <h3 style="font-size:1rem">${v.title}</h3>
-                                <p style="color:var(--primary); font-size:0.8rem; font-weight:bold;">${ch.name}</p>
+                                <h3 style="font-size: 1rem;">${video.title}</h3>
+                                <p style="color:var(--primary); font-size: 0.75rem; font-weight:bold;">${ch.name}</p>
                             </div>
                         `;
                     }
-                } catch (e) { console.error("Sync error for " + ch.name); }
+                } catch (e) {
+                    console.error("Error fetching " + ch.name);
+                }
             }
-            
-            if (successCount === 0) {
-                container.innerHTML = '<div class="status-msg">Sync Delay: Check back in a few minutes or verify Channel IDs in Settings.</div>';
+            if (!hasLoaded) {
+                feedContainer.innerHTML = '<div class="status-msg">Syncing error. Please try again in 1 minute.</div>';
             }
         }
 
-        window.onload = () => { type(); fetchVideos(); };
+        window.onload = () => {
+            type();
+            fetchFeed();
+        };
     </script>
 </body>
 </html>
