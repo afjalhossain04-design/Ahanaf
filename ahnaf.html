@@ -1,150 +1,216 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamers Edge 09 - আপনার গেমিং প্ল্যাটফর্ম</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>AHNAF LABIB | GAMERS EDGE 09</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        :root { --primary: #FF2D7D; --accent: #00D1FF; --bg: #050505; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            background-color: #f8f8f8; /* Light background like Google AI */
-            color: #333; /* Dark text */
-        }
+        /* THE OLD NEURAL BACKGROUND */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #11050a 0%, #050505 100%); }
 
-        /* Header Styling */
-        header {
-            background-color: #ffffff; /* White background for clean look */
-            color: #000;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        /* HEADER */
+        header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(5,5,5,0.85); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Orbitron'; font-weight: 900; color: var(--primary); font-size: 1.4rem; text-shadow: 0 0 15px var(--primary); transition: 0.3s; }
 
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            /* Optional: Use a focus color for the logo, e.g., #1A73E8 (Google Blue) */
-            color: #1A73E8; 
-        }
+        /* ADMIN PANEL - FLOATING GLASS */
+        #admin-panel { display: none; position: fixed; top: 100px; right: 20px; width: 320px; background: rgba(10,10,10,0.98); border: 1px solid var(--primary); border-radius: 20px; padding: 25px; z-index: 10000; backdrop-filter: blur(25px); box-shadow: 0 20px 50px rgba(0,0,0,1); }
+        .admin-input { width: 100%; padding: 12px; margin-bottom: 12px; background: #111; border: 1px solid var(--border); color: white; border-radius: 8px; font-size: 0.8rem; }
+        .admin-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+        .admin-btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
 
-        /* Navigation Styling */
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
+        /* SECTIONS */
+        .container { max-width: 1200px; margin: auto; padding: 120px 20px 40px; }
+        .section-title { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 30px; border-left: 6px solid var(--primary); padding-left: 15px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
 
-        nav ul li {
-            margin-left: 20px;
-        }
+        /* VIDEO CARDS */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .video-card { position: relative; background: var(--glass); border: 1px solid var(--border); border-radius: 15px; text-decoration: none; color: white; transition: 0.4s; overflow: hidden; backdrop-filter: blur(5px); }
+        .video-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .thumb { aspect-ratio: 16/9; position: relative; overflow: hidden; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .video-card:hover .thumb img { transform: scale(1.1); filter: brightness(0.8); }
 
-        nav ul li a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            transition: color 0.3s;
-        }
+        /* REMOVE OVERLAY */
+        .remove-overlay { display: none; position: absolute; inset: 0; background: rgba(255, 0, 0, 0.7); align-items: center; justify-content: center; z-index: 10; cursor: pointer; color: white; font-weight: bold; flex-direction: column; gap: 10px; }
+        .delete-mode-active .remove-overlay { display: flex; }
 
-        nav ul li a:hover {
-            color: #1A73E8; /* Highlight on hover */
-        }
-
-        /* Main Content Area */
-        main {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section {
-            padding: 40px 20px;
-            margin-bottom: 30px;
-            background: #fff;
-            border-radius: 8px; /* Slightly rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        h1, h2 {
-            color: #000;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        /* Hero Section (Optional: for a clean heading) */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(to right, #ffffff, #f0f4ff); /* Subtle gradient */
-        }
-
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-            margin-top: 20px;
-        }
+        /* FOOTER */
+        footer { padding: 80px 20px; text-align: center; border-top: 1px solid var(--border); }
+        .login-trigger { opacity: 0.05; cursor: pointer; font-size: 0.7rem; margin-top: 20px; }
     </style>
 </head>
-<body>
+<body id="main-body">
+
+    <canvas id="bg-canvas"></canvas>
 
     <header>
-        <div class="logo">Gamers Edge 09</div>
-        <nav>
-            <ul>
-                <li><a href="#home">হোম</a></li>
-                <li><a href="#videos">ভিডিওস</a></li>
-                <li><a href="#downloads">ডাউনলোডস (গেম ফাইলস)</a></li>
-                <li><a href="#social">সোশ্যাল ফিড</a></li>
-                <li><a href="#products">প্রোডাক্টস</a></li>
-                <li><a href="#categories">ক্যাটাগরি</a></li>
-                <li><a href="#channels">ইউটিউব চ্যানেলস</a></li>
-            </ul>
-        </nav>
+        <div class="logo" id="site-logo">GAMERS EDGE 09</div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <h1>স্বাগতম! আপনার গেমিং হাব</h1>
-            <p>আমাদের ইউটিউব চ্যানেল এবং সমস্ত লেটেস্ট গেম ফাইল এখানে খুঁজুন।</p>
-        </section>
+    <div id="admin-panel">
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+            <span style="font-family:Orbitron; color:var(--primary);">Control Panel</span>
+            <i class="fa-solid fa-xmark" onclick="closeAdmin()" style="cursor:pointer;"></i>
+        </div>
+        <input type="text" id="v-url" class="admin-input" placeholder="YouTube Video URL">
+        <input type="text" id="v-title" class="admin-input" placeholder="Video Title">
+        <button class="admin-btn" onclick="addVideo()">Add to Archive</button>
+        <button class="admin-btn" id="del-btn" onclick="toggleDeleteMode()" style="background:#333;">Toggle Removal Mode</button>
+    </div>
 
-        <section id="videos">
-            <h2>ভিডিও ফিড</h2>
-            <div class="video-container">
-                <p>এখানে **YouTube, Facebook, Instagram-এর সর্বশেষ ভিডিও/রিলস** প্রদর্শিত হবে। এগুলোর জন্য JavaScript এবং API প্রয়োজন হবে।</p>
+    <div class="container">
+        <h2 class="section-title">Latest Uplink</h2>
+        <div style="background:var(--glass); border:1px solid var(--border); border-radius:25px; overflow:hidden; margin-bottom:60px; backdrop-filter:blur(10px);">
+            <div style="position:relative; padding-bottom:56.25%; height:0;">
+                <iframe src="https://www.youtube.com/embed/ujwrGXKa_IU" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen></iframe>
             </div>
-        </section>
+            <div style="padding:40px;">
+                <h2 style="font-family:Orbitron; color:var(--primary); margin-bottom:10px;">GTA VICE CITY: 4K STORY</h2>
+                <p style="opacity:0.7;">Experience the neon lights of the 2002 legend.</p>
+            </div>
+        </div>
 
-        <section id="downloads">
-            <h2>গেম ফাইলস ও ডাউনলোড</h2>
-            <div class="download-list">
-                <p>আপনার সকল **.rar, .zip এবং .apk** ফাইলের লিঙ্কগুলি এখানে যুক্ত হবে। ফাইল হোস্টিং-এর জন্য আপনার সার্ভার বা Google Drive-এর প্রয়োজন হবে।</p>
+        <h2 class="section-title">Video Archive</h2>
+        <div class="video-grid" id="v-grid">
+            <div class="video-card" id="vid-initial">
+                <div class="remove-overlay" onclick="removeVideo('vid-initial')">
+                    <i class="fa-solid fa-trash-can fa-2x"></i>
+                    <span>REMOVE</span>
+                </div>
+                <a href="https://www.youtube.com/watch?v=ujwrGXKa_IU" target="_blank" style="text-decoration:none; color:white;">
+                    <div class="thumb"><img src="https://img.youtube.com/vi/ujwrGXKa_IU/maxresdefault.jpg"></div>
+                    <div style="padding:20px;"><h4>GTA Mission Walkthrough</h4></div>
+                </a>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2024 Gamers Edge 09. All rights reserved.</p>
+        <div class="login-trigger" onclick="login()">[ ARCHIVE_LOCK ]</div>
     </footer>
 
-    </body>
+    <script>
+        // AUTH (Password: ahnaf09)
+        const AUTH = "YWhuYWYwOQ==";
+
+        function login() {
+            let p = prompt("Enter Access Key:");
+            if(p && btoa(p.trim()) === AUTH) {
+                document.getElementById('admin-panel').style.display = 'block';
+                document.getElementById('site-logo').style.color = '#00D1FF';
+                alert("Admin Access Granted.");
+            } else if(p) {
+                alert("Access Denied.");
+            }
+        }
+
+        function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+
+        function toggleDeleteMode() {
+            document.getElementById('main-body').classList.toggle('delete-mode-active');
+            let btn = document.getElementById('del-btn');
+            let active = document.getElementById('main-body').classList.contains('delete-mode-active');
+            btn.style.background = active ? "red" : "#333";
+            btn.innerText = active ? "Exit Removal Mode" : "Toggle Removal Mode";
+        }
+
+        function extractID(url) {
+            let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|\/v\/|embed\/|shorts\/))([^?&"'>]+)/);
+            return (match && match[1].length == 11) ? match[1] : null;
+        }
+
+        function addVideo() {
+            let url = document.getElementById('v-url').value;
+            let title = document.getElementById('v-title').value;
+            let id = extractID(url);
+            if(id && title) {
+                let time = Date.now();
+                let div = document.createElement('div');
+                div.className = 'video-card';
+                div.id = 'v-' + time;
+                div.innerHTML = `
+                    <div class="remove-overlay" onclick="removeVideo('v-${time}')"><i class="fa-solid fa-trash-can fa-2x"></i><span>REMOVE</span></div>
+                    <a href="${url}" target="_blank" style="text-decoration:none; color:white;">
+                        <div class="thumb"><img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"></div>
+                        <div style="padding:20px;"><h4>${title}</h4></div>
+                    </a>`;
+                document.getElementById('v-grid').prepend(div);
+                document.getElementById('v-url').value = '';
+                document.getElementById('v-title').value = '';
+            }
+        }
+
+        function removeVideo(id) {
+            if(confirm("Delete this video?")) document.getElementById(id).remove();
+        }
+
+        // --- THE OLD ADVANCED PARTICLE ENGINE ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 1,
+                    vy: (Math.random() - 0.5) * 1
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // Mouse interaction
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < mouse.radius) {
+                    p.x -= dx/30; p.y -= dy/30;
+                }
+
+                ctx.fillStyle = 'rgba(255, 45, 125, 0.8)';
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+
+                for (let j = i; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let d2x = p.x - p2.x;
+                    let d2y = p.y - p2.y;
+                    let dist2 = Math.sqrt(d2x*d2x + d2y*d2y);
+                    if (dist2 < 100) {
+                        ctx.strokeStyle = `rgba(255, 45, 125, ${1 - dist2/100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', initParticles);
+        initParticles(); animate();
+    </script>
+</body>
 </html>
